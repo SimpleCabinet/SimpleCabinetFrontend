@@ -18,7 +18,7 @@
     "skinview3d": "^2.0.0-alpha.10",
     "vue": "^2.6.12",
     "vue-qrcode": "^0.3.3",
-    "vue-router": "^3.4.3",
+    "vue-router": "^3.4.5",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
