@@ -10,13 +10,13 @@
             <b-button-group vertical class="btn-block">
               <b-button-group v-if="owner">
                 <b-button squared variant="light" @click="uploadSkin()" class="w-75"><b-icon icon="file-earmark-image" aria-hidden="true"></b-icon> скин</b-button>
-                <b-button squared variant="light" class="border-0 bg-light" id="tp-remove-skin" bg-light>
+                <b-button squared variant="light" class="border-0 bg-light" id="tp-remove-skin" bg-light @click="removeSkin()">
                   <b-icon icon="x-circle" variant="danger" aria-label="Удалить скин"></b-icon>
                 </b-button>
               </b-button-group>
               <b-button-group v-if="owner">
                 <b-button squared variant="light" @click="uploadCloak()" class="w-75"><b-icon icon="file-earmark-image" aria-hidden="true"></b-icon> плащ</b-button>
-                <b-button squared variant="light" class="border-0" id="tp-remove-cloak">
+                <b-button squared variant="light" class="border-0" id="tp-remove-cloak" @click="removeCloak()">
                   <b-icon icon="x-circle" variant="danger" aria-label="Удалить плащ"></b-icon>
                 </b-button>
               </b-button-group>
@@ -100,8 +100,8 @@
       </b-col>
       <b-col xl="4" class="pb-3">
         <b-card no-body header="Донат" class="shadow">
-          <b-card-title class="d-flex justify-content-center my-2">Валюта</b-card-title>
-          <b-list-group flush>
+          <b-card-title v-if="owner || admin" class="d-flex justify-content-center my-2">Валюта</b-card-title>
+          <b-list-group v-if="owner || admin" flush>
             <b-list-group-item variant="light" class="d-flex align-items-center">
               <span class="flex-grow-1">Рубли</span>
               <b-badge variant="dark">{{ user.ext.donateMoney }}
@@ -111,6 +111,12 @@
             <b-list-group-item variant="light" class="d-flex align-items-center">
               <span class="flex-grow-1">Игровая</span>
               <b-badge variant="dark">{{ user.ext.economyMoney }}
+                <b-icon icon="cash-stack" aria-hidden="true"></b-icon>
+              </b-badge>
+            </b-list-group-item>
+            <b-list-group-item v-if="user.ext.extendedMoney > 0" variant="light" class="d-flex align-items-center">
+              <span class="flex-grow-1">Особая</span>
+              <b-badge variant="dark">{{ user.ext.extendedMoney }}
                 <b-icon icon="cash-stack" aria-hidden="true"></b-icon>
               </b-badge>
             </b-list-group-item>
@@ -207,6 +213,8 @@ export default {
           skinType: "SKIN",
           data: data.split("+").join("-").split("/").join("_"),
         });
+        if(!this.user.skin)
+          this.updateSkinUrl();
         this.$refs.skinviewer.updateSkin();
       } catch (e) {
         this.$bvToast.toast(e.error, {
@@ -225,6 +233,8 @@ export default {
           skinType: "CLOAK",
           data: data.split("+").join("-").split("/").join("_"),
         });
+        if(!this.user.cloak)
+          this.updateSkinUrl();
         this.$refs.skinviewer.updateCloak();
       } catch (e) {
         this.$bvToast.toast(e.error, {
@@ -233,6 +243,46 @@ export default {
         });
         return;
       }
+    },
+    removeSkin: async function() {
+      try {
+        await this.$store.dispatch("request", {
+          type: "lkUploadSkin",
+          skinType: "SKIN",
+          remove: true,
+        });
+        this.user.skin = null;
+      } catch (e) {
+        this.$bvToast.toast(e.error, {
+          title: "Ошибка при удалении скина",
+          autoHideDelay: 5000,
+        });
+        return;
+      }
+    },
+    removeCloak: async function() {
+      try {
+        await this.$store.dispatch("request", {
+          type: "lkUploadSkin",
+          skinType: "CLOAK",
+          remove: true,
+        });
+        this.user.cloak = null;
+      } catch (e) {
+        this.$bvToast.toast(e.error, {
+          title: "Ошибка при удалении плаща",
+          autoHideDelay: 5000,
+        });
+        return;
+      }
+    },
+    updateSkinUrl: async function() {
+      var info = await this.$store.dispatch("request", {
+        type: "profileByUUID",
+        uuid: this.user.uuid,
+      });
+      this.user.skin = info.playerProfile.skin ? info.playerProfile.skin.url : null;
+      this.user.cloak = info.playerProfile.cloak ? info.playerProfile.cloak.url : null;
     },
     readFileToBase64: async function () {
       return new Promise((resolve, reject) => {

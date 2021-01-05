@@ -15,8 +15,8 @@ export default {
       canvas: this.$refs.skinview3dinst,
       width: 300,
       height: 400,
-      skin: this.skinUrl,
-      cape: this.cloakUrl,
+      skin: this.skinUrl ? this.skinUrl : this.$store.state.config.defaultSkinUrl,
+      cape: this.cloakUrl  ? this.cloakUrl : this.$store.state.config.defaultCloakUrl,
     });
     this.skinViewer.canvas.style = "";
     const control = skinview3d.createOrbitControls(this.skinViewer);
@@ -24,12 +24,18 @@ export default {
   },
   methods: {
     updateSkin() {
-      this.skinViewer.loadSkin(this.skinUrl + "?v=" + this.counter);
+      this.skinViewer.loadSkin(!this.skinUrl ? this.$store.state.config.defaultSkinUrl : this.skinUrl + "?v=" + this.counter);
       this.counter++;
     },
     updateCloak() {
-      this.skinViewer.loadCape(this.cloakUrl + "?v=" + this.counter);
+      this.skinViewer.loadCape(!this.cloakUrl ? this.$store.state.config.defaultCloakUrl : this.cloakUrl + "?v=" + this.counter);
       this.counter++;
+    },
+    removeSkin() {
+      this.SkinViewer.loadSkin(null);
+    },
+    removeCloak() {
+      this.SkinViewer.loadCape(null);
     },
   },
   watch: {

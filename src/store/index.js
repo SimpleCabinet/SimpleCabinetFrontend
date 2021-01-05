@@ -29,7 +29,9 @@ export default new Vuex.Store({
     },
     config: {
       projectName: null,
-      devtools: false
+      devtools: false,
+      defaultSkinUrl: null,
+      defaultCloakUrl: null
     },
     api: new GravitApi()
   },
@@ -68,6 +70,8 @@ export default new Vuex.Store({
     onConfig(state, event) {
       state.config.projectName = event.projectName;
       state.config.devtools = event.devtools;
+      state.config.defaultSkinUrl = event.defaultSkinUrl;
+      state.config.defaultCloakUrl = event.defaultCloakUrl;
     },
     enable2FA(state) {
       state.user.ext.privateUserZone.enabled2FA = true;
