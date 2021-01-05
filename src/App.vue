@@ -50,7 +50,7 @@ export default {
     },
   },
   mounted: function () {
-    console.log("SimpleCabinet by Gravit'a 1.0.0");
+    console.log("SimpleCabinet by Gravit'a 1.0.1");
     console.log("License MIT, docs and source code: https://github.com/SimpleCabinet/SimpleCabinetPublicDocs");
     var instance = this;
     this.$store.state.api.callbacks.onclose = function (error) {

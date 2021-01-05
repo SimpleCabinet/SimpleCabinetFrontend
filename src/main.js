@@ -42,7 +42,7 @@ api.onOpen = () => {
    }
 };
 */
-api.debugmode = true; // enable debugmode
+api.debugmode = false; // enable debugmode
 
 api.promises.auth = new Promise(function (resolve, reject) {
   api.promises.auth_resolve = resolve
