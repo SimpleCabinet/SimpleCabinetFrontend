@@ -150,7 +150,7 @@ export default {
       evt.preventDefault();
       await this.$store.dispatch("request", {
         type: "lkBanUser",
-        userUsername: this.user.username,
+        username: this.user.username,
       });
       this.modalBanUser.show = false;
     },
