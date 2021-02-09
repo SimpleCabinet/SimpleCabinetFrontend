@@ -196,7 +196,7 @@ export default {
                 name : this.name, price: this.price, count: this.count ? this.count : -1,
                 description: this.description,
                 endDate: (this.endDate && this.endTime) ? this.endDateObject : null,
-                productType: this.type, visible: this.visible, isAllowStack: this.isStackable,
+                productType: this.type, visible: this.visible, allowStack: this.isStackable,
                 sysId: this.sysId, sysExtra: this.sysExtra, sysNbt: this.sysNbt, sysQuantity: this.sysQuantity,
                 sysDeliveryProvider: this.sysDeliveryProvider
             });
