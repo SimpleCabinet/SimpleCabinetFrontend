@@ -7,7 +7,7 @@ var { user } = storeToRefs(authStore);
 </script>
 
 <template>
-  <main>
+  <main class="card-container">
     <UserCard :user="user" :owner="true" v-if="user"></UserCard>
   </main>
 </template>

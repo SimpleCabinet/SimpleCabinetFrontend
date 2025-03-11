@@ -17,7 +17,7 @@ export default class AuthService {
             totpPassword: totpCode
         });
         var store = useAuthStore();
-        var userData = AuthService.fetchUserInfo();
+        var userData = await AuthService.fetchUserInfo();
         store.update(userData, authData);
     }
     static async register(login, password, email, captcha) {

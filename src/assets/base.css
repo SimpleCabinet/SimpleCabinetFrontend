@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body {
+    --colors-text-primary: #121212;
+    --colors-text-action: #657BF3;
+    --colors-background-primary: #FFFFFF;
+    --colors-background-secondary: #F1F6F8;
+    --colors-background-shadow: #59698730;
+}

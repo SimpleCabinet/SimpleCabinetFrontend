@@ -39,7 +39,10 @@ export default class RequestService {
         if(response.status == 404) {
             return null;
         }
-        var json = await response.json();
+        var json = await response.text();
+        if(response.headers.get('Content-Type') == 'application/json') {
+            json = JSON.parse(json);
+        }
         if(response.ok) {
             return json;
         } else {
