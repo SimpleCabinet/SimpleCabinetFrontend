@@ -1,18 +1,21 @@
 <script setup>
+import { computed } from 'vue';
 import AvatarHead from './AvatarHead.vue';
 import AssetUploader from './cabinet/AssetUploader.vue';
 import SkinView from './cabinet/SkinView.vue';
 
 const props = defineProps(['user', 'owner'])
+const skin = computed(() => { return props.user ? props.user.assets.skin : null });
+const cape = computed(() => { return props.user ? props.user.assets.cape : null });
 </script>
 <template>
     <div class="card">
     <p>
-        <AvatarHead :skin="props.user ? props.user.assets.skin : null" class="avatar"></AvatarHead>
+        <AvatarHead :skin="skin" class="avatar"></AvatarHead>
         {{ user.username }} ( {{ user.uuid }} )
     </p>
     <p>
-        <SkinView :skin="props.user ? props.user.assets.skin : null" :cape="props.user ? props.user.assets.cape : null"></SkinView>
+        <SkinView :skin="skin" :cape="cape"></SkinView>
     </p>
     <p v-if="owner">
         Upload Skin <AssetUploader type="skin"></AssetUploader>

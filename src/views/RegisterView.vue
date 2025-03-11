@@ -17,14 +17,32 @@ async function register() {
 </script>
 
 <template>
-  <main>
-    <form>
-      <input type="text" v-model="login"></input>
-      <input type="text" v-model="email"></input>
-      <input type="password" v-model="password"></input>
-      <input type="password" v-model="confirmPassword"></input>
-      <vue-hcaptcha :sitekey="siteKey" @verify="updateToken"></vue-hcaptcha>
-      <button type="button" @click="register">Register</button>
-    </form>
+  <main class="card-container">
+    <div class="card auth-card">
+      <h2>Register</h2>
+      <div class="form">
+        <input type="text" v-model="login" placeholder="Login"></input>
+      </div>
+      <div class="form">
+        <input type="password" v-model="password" placeholder="Password"></input>
+      </div>
+      <div class="form">
+        <input type="password" v-model="confirmPassword" placeholder="Confirm password"></input>
+      </div>
+      <div class="form">
+        <input type="text" v-model="email" placeholder="Email"></input>
+      </div>
+      <div class="form">
+        <vue-hcaptcha :sitekey="siteKey" @verify="updateToken"></vue-hcaptcha>
+      </div>
+      <div class="form">
+        <button type="submit" @click="register">Register</button>
+      </div>
+    </div>
   </main>
 </template>
+<style scoped>
+.auth-card {
+  min-width: 400px;
+}
+</style>

@@ -26,7 +26,62 @@ main {
 .card {
     height: fit-content;
     width: fit-content;
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 5px 10px 0px var(--colors-background-shadow);
+}
+
+.card h2 {
+    width: auto;
+    text-align: center;
+}
+
+.form {
+    display: block;
+    box-sizing: border-box;
+}
+
+.form input, .form .input-label, .form button {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+}
+.form input[type=text], .form input[type=password] {
+    height: 50px;
+    padding-left: 20px;
+    border: none;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.form input[type=text]:focus-visible, .form input[type=password]:focus-visible {
+    border: none;
+    outline: none;
+    background-color: var(--colors-background-input);
+}
+
+.form input[type=text]:hover::placeholder, .form input[type=password]:hover::placeholder {
+    color: var(--colors-text-primary);
+}
+
+.form + .form {
+    padding-top: 20px;
+}
+
+button {
+    min-height: 40px;
+    color: var(--colors-background-primary);
+    background-color: var(--colors-text-action);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 800;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0px 0px 50px 0px var(--colors-text-action-shadow);
 }

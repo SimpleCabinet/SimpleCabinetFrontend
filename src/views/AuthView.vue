@@ -13,12 +13,26 @@ async function authorize(e) {
 </script>
 
 <template>
-  <main>
-    <form>
-      <input type="text" v-model="login"></input>
-      <input type="password" v-model="password"></input>
-      <input type="password" v-model="totpCode"></input>
-      <button type="button" @click="authorize">Authorize</button>
-    </form>
+  <main class="card-container">
+    <div class="card auth-card">
+      <h2>Authorize</h2>
+      <div class="form">
+        <input type="text" v-model="login" placeholder="Login"></input>
+      </div>
+      <div class="form">
+        <input type="password" v-model="password" placeholder="Password"></input>
+      </div>
+      <div class="form">
+        <input type="password" v-model="totpCode" placeholder="Totp Code"></input>
+      </div>
+      <div class="form">
+        <button type="sumbit" @click="authorize">Authorize</button>
+      </div>
+    </div>
   </main>
 </template>
+<style scoped>
+.auth-card {
+  min-width: 400px;
+}
+</style>

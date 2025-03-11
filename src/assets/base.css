@@ -3,7 +3,9 @@
 body {
     --colors-text-primary: #121212;
     --colors-text-action: #657BF3;
+    --colors-text-action-shadow: #657BF380;
     --colors-background-primary: #FFFFFF;
     --colors-background-secondary: #F1F6F8;
+    --colors-background-input: #d1dade;
     --colors-background-shadow: #59698730;
 }
