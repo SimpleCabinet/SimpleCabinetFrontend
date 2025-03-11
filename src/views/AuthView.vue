@@ -8,7 +8,7 @@ var totpCode = ref("");
 var router = useRouter();
 async function authorize(e) {
   var e = await AuthService.authorize(login.value, password.value, totpCode.value);
-  router.push('/');
+  router.push('/cabinet');
 }
 </script>
 

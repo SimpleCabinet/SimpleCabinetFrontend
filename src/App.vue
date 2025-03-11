@@ -11,6 +11,7 @@ onMounted(() => {
 <template>
   <header>
       <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/cabinet">Cabinet</RouterLink>
   </header>
 
   <RouterView />

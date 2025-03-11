@@ -18,7 +18,7 @@ const props = defineProps(['user', 'owner'])
         Upload Cape <AssetUploader type="cape"></AssetUploader>
     </p>
     <p>
-        <RouterLink to="/security/enable2fa">Enable 2FA</RouterLink><br/>
-        <RouterLink to="/security/disable2fa">Disable 2FA</RouterLink>
+        <RouterLink to="/cabinet/security/enable2fa">Enable 2FA</RouterLink><br/>
+        <RouterLink to="/cabinet/security/disable2fa">Disable 2FA</RouterLink>
     </p>
 </template>
