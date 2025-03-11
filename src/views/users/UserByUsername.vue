@@ -9,5 +9,7 @@ var user = ref(null);
 RequestService.request('GET', 'users/name/'+route.params.name+"?assets=true", null).then((response) => user.value = response);
 </script>
 <template>
-    <user-card :user="user" :owner="false" v-if="user"></user-card>
+    <main>
+        <user-card :user="user" :owner="false" v-if="user"></user-card>
+    </main>
 </template>

@@ -10,5 +10,7 @@ async function run() {
 run();
 </script>
 <template>
-    Выполняется logout
+    <main>
+        Выполняется logout
+    </main>
 </template>

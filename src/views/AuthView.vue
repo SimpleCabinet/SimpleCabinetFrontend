@@ -1,11 +1,14 @@
 <script setup>
 import AuthService from '@/services/auth-service';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 var login = ref("");
 var password = ref("");
 var totpCode = ref("");
+var router = useRouter();
 async function authorize(e) {
   var e = await AuthService.authorize(login.value, password.value, totpCode.value);
+  router.push('/');
 }
 </script>
 

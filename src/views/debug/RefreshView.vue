@@ -15,5 +15,7 @@ async function run() {
 run();
 </script>
 <template>
-    Выполняется refresh
+    <main>
+        Выполняется refresh
+    </main>
 </template>
