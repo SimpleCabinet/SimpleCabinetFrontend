@@ -22,6 +22,7 @@ var title = ref(import.meta.env.VITE_PROJECT_NAME)
     </div>
     <div class="content">
       <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/users">Users</RouterLink>
       <RouterLink to="/cabinet" v-if="logoutAvailable">Cabinet</RouterLink>
       <RouterLink to="/auth" v-if="authAvailable">Auth</RouterLink>
       <RouterLink to="/register" v-if="authAvailable">Register</RouterLink>

@@ -1281,6 +1281,11 @@ update-browserslist-db@^1.1.1:
     escalade "^3.2.0"
     picocolors "^1.1.1"
 
+v3-infinite-loading@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/v3-infinite-loading/-/v3-infinite-loading-1.3.2.tgz#c95c8031ac648997b667bb580dba5f0301fb3597"
+  integrity sha512-2Bg8X8nqd9tKEOJdITABtuX2BMSYo/t+eZOAD+9/xz0fGyGDclglmWjo9Zs4dr/T63liO7EniBAunBesM2QhBA==
+
 vite-hot-client@^0.2.4:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/vite-hot-client/-/vite-hot-client-0.2.4.tgz#c88789f1615cf4e95690cd5fca98b2e449a29637"
