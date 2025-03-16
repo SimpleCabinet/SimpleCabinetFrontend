@@ -13,7 +13,7 @@ async function disable2Fa() {
 }
 async function disable() {
   await disable2Fa();
-  showModal = false;
+  showModal.value = false;
 }
 </script>
 <template>

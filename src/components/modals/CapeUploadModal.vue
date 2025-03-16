@@ -3,13 +3,15 @@ import AssetService from '@/services/asset-service';
 import Modal from '../ui/Modal.vue';
 import { computed, ref } from 'vue'
 
+const $emit = defineEmits(['uploaded']);
 const showModal = ref(false)
 const file = ref(null);
 const toggleSlim = ref(false);
 const skin = ref(null);
 async function upload() {
-  await AssetService.uploadCape(file.value.files[0]);
-  showModal = false;
+  var response = await AssetService.uploadCape(file.value.files[0]);
+  $emit('uploaded', response);
+  showModal.value = false;
 }
 </script>
 <template>

@@ -41,5 +41,9 @@ export const useAuthStore = defineStore('auth', () => {
     RequestService.accessToken = null;
   }
 
-  return { user, accessToken, refreshToken, update, reset, fetchFromStorage, isTokenExpired }
+  function updateAsset(name, data) {
+    user.value.assets[name] = data;
+  }
+
+  return { user, accessToken, refreshToken, update, reset, fetchFromStorage, isTokenExpired, updateAsset }
 })

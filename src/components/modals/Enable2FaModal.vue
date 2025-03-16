@@ -28,7 +28,7 @@ watch(showModal, (newValue) => {
 })
 async function enable() {
   await enable2Fa();
-  showModal = false;
+  showModal.value = false;
 }
 </script>
 <template>

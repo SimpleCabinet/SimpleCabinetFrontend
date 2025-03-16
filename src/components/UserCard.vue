@@ -8,7 +8,8 @@ import CapeUploadModal from './modals/CapeUploadModal.vue';
 import Enable2FaModal from './modals/Enable2FaModal.vue';
 import Disable2FaModal from './modals/Disable2FaModal.vue';
 import ChangePasswordModal from './modals/ChangePasswordModal.vue';
-
+import { useAuthStore } from '@/stores/auth';
+const authStore = useAuthStore();
 const props = defineProps(['user', 'owner'])
 const skin = computed(() => { return props.user ? props.user.assets.skin : null });
 const cape = computed(() => { return props.user ? props.user.assets.cape : null });
@@ -61,8 +62,8 @@ if(props.owner) {
             <div class="skinview card">
                 <SkinView :skin="skin" :cape="cape"></SkinView>
                 <div class="asset-management" v-if="owner">
-                    <SkinUploadModal></SkinUploadModal>
-                    <CapeUploadModal></CapeUploadModal>
+                    <SkinUploadModal @uploaded="authStore.updateAsset('skin', $event)"></SkinUploadModal>
+                    <CapeUploadModal @uploaded="authStore.updateAsset('cape', $event)"></CapeUploadModal>
                 </div>
             </div>
             <div>
@@ -90,8 +91,8 @@ if(props.owner) {
                 <div v-if="owner && securityInfo">
                     <h2>Security</h2>
                     <div class="asset-management">
-                        <Enable2FaModal v-if="securityInfo.enabled2FA"></Enable2FaModal>
-                        <Disable2FaModal v-if="!securityInfo.enabled2FA"></Disable2FaModal>
+                        <Enable2FaModal v-if="!securityInfo.enabled2FA"></Enable2FaModal>
+                        <Disable2FaModal v-if="securityInfo.enabled2FA"></Disable2FaModal>
                         <ChangePasswordModal></ChangePasswordModal>
                     </div>
                 </div>

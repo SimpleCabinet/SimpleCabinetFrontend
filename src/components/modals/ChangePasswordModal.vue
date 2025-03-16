@@ -12,7 +12,7 @@ async function changePassword() {
   var response = await RequestService.request('GET', 'cabinet/security/disable2fa', {
         code: code.value
   });
-  showModal = false;
+  showModal.value = false;
 }
 </script>
 <template>
