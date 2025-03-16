@@ -1,9 +1,13 @@
 <script setup>
 import { computed, ref } from 'vue';
 import AvatarHead from './AvatarHead.vue';
-import AssetUploader from './cabinet/AssetUploader.vue';
 import SkinView from './cabinet/SkinView.vue';
 import RequestService from '@/services/request-service';
+import SkinUploadModal from './modals/SkinUploadModal.vue';
+import CapeUploadModal from './modals/CapeUploadModal.vue';
+import Enable2FaModal from './modals/Enable2FaModal.vue';
+import Disable2FaModal from './modals/Disable2FaModal.vue';
+import ChangePasswordModal from './modals/ChangePasswordModal.vue';
 
 const props = defineProps(['user', 'owner'])
 const skin = computed(() => { return props.user ? props.user.assets.skin : null });
@@ -37,12 +41,18 @@ if(props.owner) {
         balance.value = e.data;
     })
 }
+var securityInfo = ref(null);
+if(props.owner) {
+    RequestService.request('GET', 'cabinet/security/info', null).then((e => {
+        securityInfo.value = e;
+    }))
+}
 </script>
 <template>
     <div class="card">
         <div class="card-header">
             <AvatarHead :skin="skin" class="avatar"></AvatarHead>
-            <span class="username">Gravita</span>
+            <span class="username">{{ user.username }}</span>
         </div>
         <div>
             {{ user.status }}
@@ -50,12 +60,10 @@ if(props.owner) {
         <div class="card-separate">
             <div class="skinview card">
                 <SkinView :skin="skin" :cape="cape"></SkinView>
-                <p v-if="owner">
-                    <AssetUploader type="skin"></AssetUploader>
-                </p>
-                <p v-if="owner">
-                    <AssetUploader type="cape"></AssetUploader>
-                </p>
+                <div class="asset-management" v-if="owner">
+                    <SkinUploadModal></SkinUploadModal>
+                    <CapeUploadModal></CapeUploadModal>
+                </div>
             </div>
             <div>
                 <div>
@@ -73,17 +81,22 @@ if(props.owner) {
                 </div>
                 <div v-if="balance">
                     <h2>Balance</h2>
+                    <span v-if="balance.length == 0">No balance</span>
                     <div v-for="p in balance">
                         <span class="playerinfo-value">{{ p.balance }}</span> <span class="playerinfo-name">{{ p.currency
                             }}</span>
                     </div>
                 </div>
+                <div v-if="owner && securityInfo">
+                    <h2>Security</h2>
+                    <div class="asset-management">
+                        <Enable2FaModal v-if="securityInfo.enabled2FA"></Enable2FaModal>
+                        <Disable2FaModal v-if="!securityInfo.enabled2FA"></Disable2FaModal>
+                        <ChangePasswordModal></ChangePasswordModal>
+                    </div>
+                </div>
             </div>
         </div>
-        <p>
-            <RouterLink to="/cabinet/security/enable2fa">Enable 2FA</RouterLink><br />
-            <RouterLink to="/cabinet/security/disable2fa">Disable 2FA</RouterLink>
-        </p>
     </div>
 </template>
 <style scoped>
@@ -112,5 +125,10 @@ if(props.owner) {
 
 .playerinfo-name {
     font-weight: 600;
+}
+
+.asset-management {
+    display: flex;
+    gap: 10px;
 }
 </style>

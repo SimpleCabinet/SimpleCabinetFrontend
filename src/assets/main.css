@@ -7,7 +7,7 @@ body {
 }
 
 main {
-    padding: 10px;
+    padding: 30px 20px 0px 20px;
 }
 
 .bg-card {
@@ -41,7 +41,7 @@ main {
     box-sizing: border-box;
 }
 
-.form input, .form .input-label, .form button {
+.form input[type=text], .form input[type=password], .form .input-label, .form button {
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -66,6 +66,10 @@ main {
 
 .form + .form {
     padding-top: 20px;
+}
+
+.form input[type=checkbox] + label {
+    padding-left: 8px;
 }
 
 button {

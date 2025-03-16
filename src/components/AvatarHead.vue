@@ -1,6 +1,8 @@
 <script setup>
+import DefaultSkin from '@/assets/skins/DefaultSteve.png';
 import { computed, watch, ref } from 'vue';
 var props = defineProps(['skin']);
+var skinOrDefault = computed(() => props.skin ? props.skin : { url: DefaultSkin })
 async function makeAvater(skinUrl) {
     var canvas = document.createElement("canvas");
     var context = canvas.getContext('2d');
@@ -26,10 +28,8 @@ async function makeAvater(skinUrl) {
     );
 }
 var image = ref(null);
-if(props.skin) {
-    makeAvater(props.skin.url).then((e) => image.value = e);
-    watch(props.skin, (newValue) => makeAvater(props.skin.url).then((e) => image.value = e));
-}
+makeAvater(skinOrDefault.value.url).then((e) => image.value = e);
+watch(skinOrDefault, (newValue) => makeAvater(skinOrDefault.value.url).then((e) => image.value = e));
 </script>
 <template>
     <img style="image-rendering: pixelated;" :src="image">

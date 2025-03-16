@@ -9,7 +9,7 @@ var user = ref(null);
 RequestService.request('GET', 'users/uuid/'+route.params.uuid+"?assets=true", null).then((response) => user.value = response);
 </script>
 <template>
-    <main>
+    <main class="card-container">
         <user-card :user="user" :owner="false" v-if="user"></user-card>
     </main>
 </template>
