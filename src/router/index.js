@@ -5,6 +5,7 @@ import users from './users'
 import auth from './auth'
 import debug from './debug'
 import security from './security'
+import shop from './shop'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +24,7 @@ const router = createRouter({
     ...auth,
     ...debug,
     ...security,
+    ...shop,
     {
       path: '/about',
       name: 'about',
