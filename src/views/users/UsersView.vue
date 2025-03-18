@@ -15,7 +15,10 @@ async function loadMore(needCheck) {
     if (needCheck && pageId.value >= result.value.totalPages) {
         return;
     }
-    result.value = await RequestService.request('GET', 'users/search/' + search.value + '/' + pageId.value);
+    var url = search.value.length > 0 ? 
+        'users/search/' + search.value + '/' + pageId.value :
+        'users/page/' + pageId.value;
+    result.value = await RequestService.request('GET', url);
     for (var e of result.value.data) {
         users.value.push(e);
     }
