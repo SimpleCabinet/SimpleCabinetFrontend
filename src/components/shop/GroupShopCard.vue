@@ -59,10 +59,10 @@ async function buy() {
     margin-top: 20px;
 }
 .group-card {
-    width: 450px;
+    width: 400px;
 }
 .group-card-price {
-    
+
 }
 .group-card-price-text {
     font-weight: 800;

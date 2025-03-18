@@ -41,13 +41,13 @@ async function buy() {
     align-items: center;
 }
 .item-image {
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     image-rendering: pixelated;
 }
 .item-card-display-name {
     font-weight: 800;
-    font-size: 32px;
+    font-size: 24px;
     text-align: center;
     margin-top: 5px;
 }
@@ -56,10 +56,11 @@ async function buy() {
     text-align: center;
 }
 .item-card .item-card-element + .item-card-element {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .item-card {
-    width: 400px;
+    width: 300px;
+    padding: 20px;
 }
 .item-card-price {
     

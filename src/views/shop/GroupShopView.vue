@@ -3,25 +3,38 @@ import GroupShopCard from "@/components/shop/GroupShopCard.vue";
 import RequestService from "@/services/request-service";
 import InfiniteLoading from "v3-infinite-loading";
 import "v3-infinite-loading/lib/style.css";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 var result = ref(null);
+var search = ref('');
 var items = ref([]);
 var pageId = ref(0);
 async function loadMore(needCheck) {
     if (needCheck && pageId.value >= result.value.totalPages) {
         return;
     }
-    result.value = await RequestService.request('GET', 'shop/group/page/' + pageId.value);
+    var url = search.value.length > 0 ? 
+        'shop/group/search/' + search.value + '/' + pageId.value :
+        'shop/group/page/' + pageId.value;
+    result.value = await RequestService.request('GET', url);
     for (var e of result.value.data) {
         items.value.push(e);
     }
     pageId.value = pageId.value + 1;
 }
 loadMore(false);
+watch(search, (newValue) => {
+    items.value = [];
+    result.value = null;
+    pageId.value = 0;
+    loadMore(false);
+})
 </script>
 <template>
     <main>
+        <div class="form">
+            <input type="text" placeholder="Search" v-model="search">
+        </div>
         <div class="group-shop-cards">
             <GroupShopCard :item="item" v-for="item in items">
 
@@ -35,5 +48,7 @@ loadMore(false);
 .group-shop-cards {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 </style>
